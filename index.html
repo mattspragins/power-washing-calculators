@@ -8,16 +8,81 @@
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @media print {
+            .no-print { display: none; }
+            .print-friendly { break-inside: avoid; }
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <div id="root"></div>
-    <script type="module">
-        import { BuildingCalculator } from './js/BuildingCalculator.js';
-        import { ParkingCalculator } from './js/ParkingCalculator.js';
-        import { WalkwayCalculator } from './js/WalkwayCalculator.js';
+    <script type="text/babel">
+        // [Previous Card components code]
+        // [Previous BuildingCalculator code]
+        // [Previous ParkingCalculator code]
+        // [Previous WalkwayCalculator code] 
+        
+        const App = () => {
+            const [activeTab, setActiveTab] = React.useState('building');
+            const [settings] = React.useState({
+                companyName: 'Rolling Suds East Bay'
+            });
 
-        // Continue with App component code...
-        // [Previous App component code from the index.html file]
+            const renderContent = () => {
+                switch (activeTab) {
+                    case 'building':
+                        return <BuildingCalculator settings={settings} />;
+                    case 'parking':
+                        return <ParkingCalculator settings={settings} />;
+                    case 'walkway':
+                        return <WalkwayCalculator settings={settings} />;
+                    default:
+                        return null;
+                }
+            };
+
+            return (
+                <div className="container mx-auto px-4 py-8 max-w-6xl">
+                    <div className="flex justify-between items-center mb-8">
+                        <h1 className="text-3xl font-bold">{settings.companyName} - Cleaning Calculator</h1>
+                        <button
+                            onClick={() => window.print()}
+                            className="flex items-center px-4 py-2 bg-gray-100 rounded hover:bg-gray-200 no-print"
+                        >
+                            Print
+                        </button>
+                    </div>
+                    
+                    <div className="flex space-x-4 mb-6 border-b">
+                        <button
+                            className={`p-4 ${activeTab === 'building' ? 'border-b-2 border-blue-500' : ''}`}
+                            onClick={() => setActiveTab('building')}
+                        >
+                            Building Exterior
+                        </button>
+                        <button
+                            className={`p-4 ${activeTab === 'parking' ? 'border-b-2 border-blue-500' : ''}`}
+                            onClick={() => setActiveTab('parking')}
+                        >
+                            Parking Garage
+                        </button>
+                        <button
+                            className={`p-4 ${activeTab === 'walkway' ? 'border-b-2 border-blue-500' : ''}`}
+                            onClick={() => setActiveTab('walkway')}
+                        >
+                            Walkway
+                        </button>
+                    </div>
+                    
+                    <div className="mt-6">
+                        {renderContent()}
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
 </html>
