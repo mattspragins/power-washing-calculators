@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolling Suds - Building Cleaning Calculator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen py-8">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
+            <div class="p-6 border-b border-gray-200">
+                <h1 class="text-2xl font-bold">Building Cleaning Calculator</h1>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block mb-2">Building Perimeter (LF)</label>
+                        <input type="number" id="perimeter" class="w-full p-2 border rounded" placeholder="Enter perimeter in linear feet">
+                    </div>
+                    <div>
+                        <label class="block mb-2">Number of Stories</label>
+                        <select id="stories" class="w-full p-2 border rounded">
+                            <option value="2">2 Stories</option>
+                            <option value="3">3 Stories</option>
+                            <option value="4">4 Stories</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Number of Buildings</label>
+                        <input type="number" id="buildingCount" class="w-full p-2 border rounded" placeholder="Total buildings in complex">
+                    </div>
+                    <div>
+                        <label class="block mb-2">Primary Material</label>
+                        <select id="material" class="w-full p-2 border rounded">
+                            <option value="vinyl">Vinyl</option>
+                            <option value="hardie">HardiePlank</option>
+                            <option value="brick">Brick</option>
+                            <option value="stucco">Stucco</option>
+                            <option value="mixed">Mixed Materials</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="calculateBtn" class="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    Calculate
+                </button>
+                
+                <div id="results" class="mt-6 p-4 bg-gray-50 rounded hidden">
+                    <h3 class="font-bold mb-4">Project Summary:</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-medium">Price per Building:</p>
+                            <p id="pricePerBuilding" class="text-xl"></p>
+                        </div>
+                        <div>
+                            <p class="font-medium">Buildings per Day:</p>
+                            <p id="buildingsPerDay" class="text-xl"></p>
+                        </div>
+                        <div>
+                            <p class="font-medium">Daily Revenue:</p>
+                            <p id="dailyRevenue" class="text-xl"></p>
+                            <p id="baselineRevenue" class="text-sm text-gray-600"></p>
+                        </div>
+                        <div>
+                            <p class="font-medium">Scale Multiplier:</p>
+                            <p id="scaleMultiplier" class="text-xl"></p>
+                        </div>
+                        <div>
+                            <p class="font-medium">Total Days:</p>
+                            <p id="totalDays" class="text-xl"></p>
+                        </div>
+                        <div>
+                            <p class="font-medium">Total Project Cost:</p>
+                            <p id="totalCost" class="text-xl text-blue-600"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="calculator.js"></script>
+</body>
+</html>
